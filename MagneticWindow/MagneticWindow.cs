@@ -32,6 +32,11 @@ namespace MagneticWindow
                 WindowState = FormWindowState.Minimized;
             }
         }
+
+        private void NotifyIconExit_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Close();
+        }
     }
 
 }

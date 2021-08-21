@@ -32,14 +32,33 @@ namespace MagneticWindow
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MagneticWindow));
             this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.NotifyIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.NotifyIconExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.NotifyIconMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // NotifyIcon
             // 
+            this.NotifyIcon.ContextMenuStrip = this.NotifyIconMenu;
             this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
             this.NotifyIcon.Text = "NotifyIcon";
             this.NotifyIcon.Visible = true;
             this.NotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseDoubleClick);
+            // 
+            // NotifyIconMenu
+            // 
+            this.NotifyIconMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.NotifyIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NotifyIconExit});
+            this.NotifyIconMenu.Name = "NotifyIconMenu";
+            this.NotifyIconMenu.Size = new System.Drawing.Size(112, 34);
+            // 
+            // NotifyIconExit
+            // 
+            this.NotifyIconExit.Name = "NotifyIconExit";
+            this.NotifyIconExit.Size = new System.Drawing.Size(111, 30);
+            this.NotifyIconExit.Text = "Exit";
+            this.NotifyIconExit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NotifyIconExit_MouseDoubleClick);
             // 
             // MagneticWindow
             // 
@@ -48,6 +67,7 @@ namespace MagneticWindow
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "MagneticWindow";
             this.Text = "MagneticWindow";
+            this.NotifyIconMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -55,6 +75,8 @@ namespace MagneticWindow
         #endregion
 
         private System.Windows.Forms.NotifyIcon NotifyIcon;
+        private System.Windows.Forms.ContextMenuStrip NotifyIconMenu;
+        private System.Windows.Forms.ToolStripMenuItem NotifyIconExit;
     }
 }
 
