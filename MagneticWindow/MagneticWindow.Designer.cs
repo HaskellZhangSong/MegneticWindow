@@ -64,9 +64,10 @@ namespace MagneticWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(180, 0);
             this.Name = "MagneticWindow";
             this.Text = "MagneticWindow";
+            this.Load += new System.EventHandler(this.MagneticWindow_Load);
             this.NotifyIconMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 

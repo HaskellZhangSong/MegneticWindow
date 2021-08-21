@@ -15,9 +15,12 @@ namespace MagneticWindow
         static FormWindowState prevWindowState = FormWindowState.Normal;
         public MagneticWindow()
         {
+            this.Visible = false;
+            ShowInTaskbar = false;
+            this.WindowState = FormWindowState.Minimized;
             InitializeComponent();
             prevWindowState = WindowState;
-            ShowInTaskbar = false;
+            
             new ShortCutHook();
         }
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -36,6 +39,13 @@ namespace MagneticWindow
         private void NotifyIconExit_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Close();
+        }
+
+        private void MagneticWindow_Load(object sender, EventArgs e)
+        {
+            this.Hide();
+            Visible = false;
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 
