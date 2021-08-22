@@ -33,6 +33,8 @@ namespace MagneticWindow
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MagneticWindow));
             this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.NotifyIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.NotifyIconAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.NotifyIconExit = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyIconMenu.SuspendLayout();
             this.SuspendLayout();
@@ -49,14 +51,28 @@ namespace MagneticWindow
             // 
             this.NotifyIconMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.NotifyIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NotifyIconAbout,
+            this.toolStripSeparator1,
             this.NotifyIconExit});
             this.NotifyIconMenu.Name = "NotifyIconMenu";
-            this.NotifyIconMenu.Size = new System.Drawing.Size(112, 34);
+            this.NotifyIconMenu.Size = new System.Drawing.Size(135, 70);
+            // 
+            // NotifyIconAbout
+            // 
+            this.NotifyIconAbout.Name = "NotifyIconAbout";
+            this.NotifyIconAbout.Size = new System.Drawing.Size(134, 30);
+            this.NotifyIconAbout.Text = "About";
+            this.NotifyIconAbout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NotifyIconAbout_MouseDoubleClick);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(131, 6);
             // 
             // NotifyIconExit
             // 
             this.NotifyIconExit.Name = "NotifyIconExit";
-            this.NotifyIconExit.Size = new System.Drawing.Size(111, 30);
+            this.NotifyIconExit.Size = new System.Drawing.Size(134, 30);
             this.NotifyIconExit.Text = "Exit";
             this.NotifyIconExit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NotifyIconExit_MouseDoubleClick);
             // 
@@ -78,6 +94,8 @@ namespace MagneticWindow
         private System.Windows.Forms.NotifyIcon NotifyIcon;
         private System.Windows.Forms.ContextMenuStrip NotifyIconMenu;
         private System.Windows.Forms.ToolStripMenuItem NotifyIconExit;
+        private System.Windows.Forms.ToolStripMenuItem NotifyIconAbout;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

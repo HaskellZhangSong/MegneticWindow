@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MagneticWindow
@@ -39,6 +32,14 @@ namespace MagneticWindow
         private void NotifyIconExit_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Close();
+        }
+
+        private void NotifyIconAbout_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string caption = "MagneticWindow";
+            string message = "Copyright © 2021 Zhang Song. All right reserved.";
+            
+            MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.None);
         }
 
         private void MagneticWindow_Load(object sender, EventArgs e)

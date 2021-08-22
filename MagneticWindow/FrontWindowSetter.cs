@@ -71,6 +71,35 @@ namespace MagneticWindow
         [DllImport("dwmapi.dll")]
         public static extern int DwmGetWindowAttribute(IntPtr hwnd, int dwAttribute, out Rect pvAttribute, int cbAttribute);
 
+        [Serializable]
+
+        internal enum WindowStates : int
+        {
+            Hide = 0,
+            Normal = 1,
+            Minimized = 2,
+            Maximized = 3,
+        }
+        internal struct WINDOWPLACEMENT
+        {
+            public int length;
+            public int flags;
+            public WindowStates showCmd;
+            public System.Drawing.Point ptMinPosition;
+            public System.Drawing.Point ptMaxPosition;
+            public System.Drawing.Rectangle rcNormalPosition;
+        }
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+
+        private static WindowStates GetFrontWindowState(IntPtr hWnd)
+        {
+            WINDOWPLACEMENT placement = new WINDOWPLACEMENT();
+            placement.length = Marshal.SizeOf(placement);
+            GetWindowPlacement(hWnd, ref placement);
+            return placement.showCmd;
+        }
         [Flags]
         private enum DwmWindowAttribute : uint
         {
@@ -107,9 +136,9 @@ namespace MagneticWindow
         private const int SW_MAXIMIZE = 3;
         private const int SW_MINIMIZE = 6;
 
-        const short SWP_NOMOVE = 0X2;
+        const short SWP_NOMOVE = 0x2;
         const short SWP_NOSIZE = 1;
-        const short SWP_NOZORDER = 0X4;
+        const short SWP_NOZORDER = 0x4;
         const int SWP_SHOWWINDOW = 0x0040;
 
         private static PositionArg pa = new PositionArg(0, 0, 0, 0);
@@ -202,11 +231,104 @@ namespace MagneticWindow
             return posArg;
         }
 
-       public static void SetFrontWindowMaximized(object sender, KeyPressedEventArgs e)
+        private static Screen GetNextScreen(Screen s)
+        {
+            int currentScreenIndex = 0;
+            Screen[] allScreen = Screen.AllScreens;
+            for(int i = 0; i < allScreen.Length; i++)
+            {
+                if(s.Equals(allScreen[i]))
+                {
+                    currentScreenIndex = i;
+                }
+            }
+
+            return allScreen[(currentScreenIndex + 1) % allScreen.Length];
+        }
+
+        private static Screen GetPreviousScreen(Screen s)
+        {
+            int currentScreenIndex = 0;
+            Screen[] allScreen = Screen.AllScreens;
+            for (int i = 0; i < allScreen.Length; i++)
+            {
+                if (s.Equals(allScreen[i]))
+                {
+                    currentScreenIndex = i;
+                }
+            }
+
+            return allScreen[(currentScreenIndex - 1) % allScreen.Length];
+        }
+        /// <summary>
+        /// Move window to next screen if had
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name=""></param>
+        public static void MoveToNextScreen(object sender, KeyPressedEventArgs e)
+        {
+            int screenSize = Screen.AllScreens.Length;
+            // save a system call, can just use modulus operation
+            if (screenSize == 0 || screenSize == 1)
+            {
+                return;
+            } else
+            {
+                IntPtr window = GetForegroundWindow();
+                Screen locatedScreen = Screen.FromHandle(window);
+                Screen nextScreen = GetNextScreen(locatedScreen);
+                MoveWindow(
+                    window, 
+                    nextScreen.WorkingArea.Right, 
+                    nextScreen.WorkingArea.Top, 
+                    nextScreen.WorkingArea.Width, 
+                    nextScreen.WorkingArea.Height, 
+                    false);
+            }
+        }
+
+        public static void MoveToPreviousScreen(object sender, KeyPressedEventArgs e)
+        {
+            int screenSize = Screen.AllScreens.Length;
+            // save a system call, can just use modulus operation
+            if (screenSize == 0 || screenSize == 1)
+            {
+                return;
+            }
+            else
+            {
+                IntPtr window = GetForegroundWindow();
+                Screen locatedScreen = Screen.FromHandle(window);
+                Screen nextScreen = GetPreviousScreen(locatedScreen);
+                MoveWindow(
+                    window,
+                    nextScreen.WorkingArea.Right,
+                    nextScreen.WorkingArea.Top,
+                    nextScreen.WorkingArea.Width,
+                    nextScreen.WorkingArea.Height,
+                    false);
+            }
+        }
+
+        /// <summary>
+        /// Toggle front window between maximized and normal state
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void ToggleWindowNormalAndMaximium(object sender, KeyPressedEventArgs e)
         {
             IntPtr window = GetForegroundWindow();
-            ShowWindow(window, SW_MAXIMIZE);
+            WindowStates ws = GetFrontWindowState(window);
+            if (ws == WindowStates.Normal)
+            {
+                ShowWindow(window, SW_MAXIMIZE);
+            } else if (ws == WindowStates.Maximized) 
+            {
+                ShowWindow(window, SW_NORMAL);
+            }
+            
         }
+
         ////////// 1/2
         public static void SetFrontWindowLeftSecond(object sender, KeyPressedEventArgs e)
         {

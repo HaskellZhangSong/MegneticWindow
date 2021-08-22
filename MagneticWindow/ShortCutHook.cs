@@ -6,7 +6,10 @@ namespace MagneticWindow
 {
     class ShortCutHook
     {
-        GlobalKeyboardHook MaximizeWindow = new GlobalKeyboardHook();
+        GlobalKeyboardHook ToggleWindowBetweenNormalAndMaxiumal = new GlobalKeyboardHook();
+
+        GlobalKeyboardHook MoveToNextScreen = new GlobalKeyboardHook();
+        GlobalKeyboardHook MoveToPreviousScreen = new GlobalKeyboardHook();
 
         GlobalKeyboardHook LeftSecond = new GlobalKeyboardHook();
         GlobalKeyboardHook RightSecond = new GlobalKeyboardHook();
@@ -40,8 +43,16 @@ namespace MagneticWindow
 
         public ShortCutHook()
         {
-            MaximizeWindow.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.SetFrontWindowMaximized);
-            MaximizeWindow.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.Enter);
+            /// Toggle window between maximum and normal state
+            ToggleWindowBetweenNormalAndMaxiumal.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.ToggleWindowNormalAndMaximium);
+            ToggleWindowBetweenNormalAndMaxiumal.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.Enter);
+
+            MoveToNextScreen.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.MoveToNextScreen);
+            MoveToNextScreen.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.OemPeriod);
+
+            MoveToPreviousScreen.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.MoveToPreviousScreen);
+            MoveToPreviousScreen.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.Oemcomma);
+
             /// 1 / 2
 
             LeftSecond.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.SetFrontWindowLeftSecond);
