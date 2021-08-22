@@ -8,6 +8,12 @@ namespace MagneticWindow
         static FormWindowState prevWindowState = FormWindowState.Normal;
         public MagneticWindow()
         {
+            DateTime NowDate = DateTime.Now;
+            DateTime ExpiredDate = new DateTime(2023, 8, 31, 0, 0, 0);
+            if (ExpiredDate.Subtract(NowDate).TotalDays < 0)
+            {
+                this.Close();
+            }
             this.Visible = false;
             ShowInTaskbar = false;
             this.WindowState = FormWindowState.Minimized;

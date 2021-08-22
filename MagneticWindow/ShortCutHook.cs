@@ -7,6 +7,7 @@ namespace MagneticWindow
     class ShortCutHook
     {
         GlobalKeyboardHook ToggleWindowBetweenNormalAndMaxiumal = new GlobalKeyboardHook();
+        GlobalKeyboardHook MinimizeWindow = new GlobalKeyboardHook();
 
         GlobalKeyboardHook MoveToNextScreen = new GlobalKeyboardHook();
         GlobalKeyboardHook MoveToPreviousScreen = new GlobalKeyboardHook();
@@ -40,12 +41,16 @@ namespace MagneticWindow
         GlobalKeyboardHook BottomLeft = new GlobalKeyboardHook();
         GlobalKeyboardHook BottomRight = new GlobalKeyboardHook();
 
+        GlobalKeyboardHook Center = new GlobalKeyboardHook();
 
         public ShortCutHook()
         {
             /// Toggle window between maximum and normal state
             ToggleWindowBetweenNormalAndMaxiumal.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.ToggleWindowNormalAndMaximium);
             ToggleWindowBetweenNormalAndMaxiumal.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.Enter);
+
+            MinimizeWindow.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.MinimizeWindow);
+            MinimizeWindow.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.M);
 
             MoveToNextScreen.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.MoveToNextScreen);
             MoveToNextScreen.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.OemPeriod);
@@ -118,6 +123,9 @@ namespace MagneticWindow
 
             BottomRight.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.SetFrontWindow_BOTTOM_RIGHT);
             BottomRight.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.K);
+
+            Center.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.SetFrontWindow_CENTER);
+            Center.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.C);
 
         }
 

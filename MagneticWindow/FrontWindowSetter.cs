@@ -44,7 +44,9 @@ namespace MagneticWindow
         TOP_LEFT,
         TOP_RIGHT,
         BOTTOM_LEFT,
-        BOTTOM_RIGHT
+        BOTTOM_RIGHT,
+
+        CENTER
     }
     public struct Rect
     {
@@ -215,6 +217,9 @@ namespace MagneticWindow
                 case Layout.BOTTOM_RIGHT:
                     posArg = new PositionArg(wa.X + wa.Width / 2, wa.Y + wa.Height / 2, wa.Width / 2, wa.Height / 2);
                     break;
+                case Layout.CENTER:
+                    posArg = new PositionArg(wa.X + wa.Width / 8, wa.Y + wa.Height / 8, wa.Width * 3 / 4, wa.Height * 3 / 4);
+                    break;
 
             }
 
@@ -327,6 +332,17 @@ namespace MagneticWindow
                 ShowWindow(window, SW_NORMAL);
             }
             
+        }
+        /// <summary>
+        /// Set front window to minimzed state
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void MinimizeWindow(object sender, KeyPressedEventArgs e)
+        {
+            IntPtr window = GetForegroundWindow();
+            WindowStates ws = GetFrontWindowState(window);
+            ShowWindow(window, SW_MINIMIZE);
         }
 
         ////////// 1/2
@@ -501,6 +517,15 @@ namespace MagneticWindow
             ShowWindow(window, SW_NORMAL);
             Screen locatedScreen = Screen.FromHandle(window);
             PositionArg pa = GetWindowPositionArg(window, locatedScreen, Layout.BOTTOM_RIGHT);
+            MoveWindow(window, pa.x, pa.y, pa.width, pa.height, true);
+        }
+
+        public static void SetFrontWindow_CENTER(object sender, KeyPressedEventArgs e)
+        {
+            IntPtr window = GetForegroundWindow();
+            ShowWindow(window, SW_NORMAL);
+            Screen locatedScreen = Screen.FromHandle(window);
+            PositionArg pa = GetWindowPositionArg(window, locatedScreen, Layout.CENTER);
             MoveWindow(window, pa.x, pa.y, pa.width, pa.height, true);
         }
     }
