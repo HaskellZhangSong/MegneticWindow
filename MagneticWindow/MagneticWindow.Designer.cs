@@ -43,7 +43,7 @@ namespace MagneticWindow
             // 
             this.NotifyIcon.ContextMenuStrip = this.NotifyIconMenu;
             this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
-            this.NotifyIcon.Text = "NotifyIcon";
+            this.NotifyIcon.Text = "MagneticWindow";
             this.NotifyIcon.Visible = true;
             this.NotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseDoubleClick);
             // 
@@ -55,12 +55,12 @@ namespace MagneticWindow
             this.toolStripSeparator1,
             this.NotifyIconExit});
             this.NotifyIconMenu.Name = "NotifyIconMenu";
-            this.NotifyIconMenu.Size = new System.Drawing.Size(135, 70);
+            this.NotifyIconMenu.Size = new System.Drawing.Size(135, 74);
             // 
             // NotifyIconAbout
             // 
             this.NotifyIconAbout.Name = "NotifyIconAbout";
-            this.NotifyIconAbout.Size = new System.Drawing.Size(134, 30);
+            this.NotifyIconAbout.Size = new System.Drawing.Size(134, 32);
             this.NotifyIconAbout.Text = "About";
             this.NotifyIconAbout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NotifyIconAbout_MouseDoubleClick);
             // 
@@ -72,15 +72,15 @@ namespace MagneticWindow
             // NotifyIconExit
             // 
             this.NotifyIconExit.Name = "NotifyIconExit";
-            this.NotifyIconExit.Size = new System.Drawing.Size(134, 30);
+            this.NotifyIconExit.Size = new System.Drawing.Size(134, 32);
             this.NotifyIconExit.Text = "Exit";
             this.NotifyIconExit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NotifyIconExit_MouseDoubleClick);
             // 
             // MagneticWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(180, 0);
+            this.ClientSize = new System.Drawing.Size(557, 437);
             this.Name = "MagneticWindow";
             this.Text = "MagneticWindow";
             this.Load += new System.EventHandler(this.MagneticWindow_Load);

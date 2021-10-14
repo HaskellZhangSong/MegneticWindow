@@ -5,6 +5,9 @@ namespace MagneticWindow
 {
     public partial class MagneticWindow : Form
     {
+        static string version = "0.4.0";
+
+        // not useful
         static FormWindowState prevWindowState = FormWindowState.Normal;
         public MagneticWindow()
         {
@@ -43,7 +46,11 @@ namespace MagneticWindow
         private void NotifyIconAbout_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string caption = "MagneticWindow";
-            string message = "Copyright © 2021 Zhang Song. All right reserved.";
+            string message = 
+                "MagneticWindow Version "
+                + version + "\n"
+                + "Copyright © 2021 Zhang Song. All right reserved.";
+
             
             MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.None);
         }

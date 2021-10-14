@@ -43,8 +43,14 @@ namespace MagneticWindow
 
         GlobalKeyboardHook Center = new GlobalKeyboardHook();
 
+        GlobalKeyboardHook NextDesktop = new GlobalKeyboardHook();
+
         public ShortCutHook()
         {
+
+            NextDesktop.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.MoveToNextDesktop);
+            NextDesktop.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.OemQuestion);
+
             /// Toggle window between maximum and normal state
             ToggleWindowBetweenNormalAndMaxiumal.KeyPressed += new EventHandler<KeyPressedEventArgs>(FrontWindowSetter.ToggleWindowNormalAndMaximium);
             ToggleWindowBetweenNormalAndMaxiumal.RegisterHotKey(ModifyKeys.Control | ModifyKeys.Win | ModifyKeys.Alt, Keys.Enter);

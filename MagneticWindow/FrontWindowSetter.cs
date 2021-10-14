@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Windows;
+using WindowsDesktop;
+using System.Windows.Interop;
 
 namespace MagneticWindow
 {
@@ -528,5 +531,26 @@ namespace MagneticWindow
             PositionArg pa = GetWindowPositionArg(window, locatedScreen, Layout.CENTER);
             MoveWindow(window, pa.x, pa.y, pa.width, pa.height, true);
         }
+
+        public static void MoveToNextDesktop(object sender, KeyPressedEventArgs e)
+        {
+            IntPtr window = GetForegroundWindow();
+            WindowStates ws = GetFrontWindowState(window);
+            ShowWindow(window, SW_NORMAL);
+            Screen locatedScreen = Screen.FromHandle(window);
+
+            var desktop = VirtualDesktop.FromHwnd(window);
+            var right = desktop.GetRight();
+            
+            if (right != null)
+            {
+                VirtualDesktopHelper.MoveToDesktop(window, right);
+                if (ws == WindowStates.Maximized)
+                {
+                    ShowWindow(window, SW_MAXIMIZE);
+                }
+            }
+        }
     }
 }
+
