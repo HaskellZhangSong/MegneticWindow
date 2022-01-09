@@ -19,29 +19,29 @@ The shortcut is at MagneticWindow/ShortCutHook.cs and cannot be changed for now 
 
 ### Toggle window between maximum and normal state
 
-`Ctrl` + `Win` + `Alt` + `Enter`
+- `Ctrl` + `Win` + `Alt` + `Enter`
 
 ### Minimize
 
-`Ctrl` + `Win` + `Alt` + `m`
+- `Ctrl` + `Win` + `Alt` + `m`
 
 ### Left and right half
 
-`Ctrl` + `Win` + `Alt` + `h`
-`Ctrl` + `Win` + `Alt` + `l`
+- `Ctrl` + `Win` + `Alt` + `h`
+- `Ctrl` + `Win` + `Alt` + `l`
 
 ### Trisection
 
-`Ctrl` + `Win` + `Alt` + `d`
-`Ctrl` + `Win` + `Alt` + `f`
-`Ctrl` + `Win` + `Alt` + `g`
+- `Ctrl` + `Win` + `Alt` + `d`
+- `Ctrl` + `Win` + `Alt` + `f`
+- `Ctrl` + `Win` + `Alt` + `g`
 
 ### Four grids
 
-`Ctrl` + `Win` + `Alt` + `u`
-`Ctrl` + `Win` + `Alt` + `i`
-`Ctrl` + `Win` + `Alt` + `j`
-`Ctrl` + `Win` + `Alt` + `k`
+- `Ctrl` + `Win` + `Alt` + `u`
+- `Ctrl` + `Win` + `Alt` + `i`
+- `Ctrl` + `Win` + `Alt` + `j`
+- `Ctrl` + `Win` + `Alt` + `k`
 
 For more shortcut, please refer the source code. 
 
